@@ -1,6 +1,8 @@
 package com.damjan.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 public class Kupac {
@@ -14,6 +16,13 @@ public class Kupac {
     private String email;
     private String telefon;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "adresa_id")
+    private Adresa adresa;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "kupac", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Narudzba> narudzbe;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -29,4 +38,8 @@ public class Kupac {
 
     public String getTelefon() { return telefon; }
     public void setTelefon(String telefon) { this.telefon = telefon; }
+
+    public Adresa getAdresa() { return adresa; }
+    public void setAdresa(Adresa adresa) { this.adresa = adresa; }
 }
+
