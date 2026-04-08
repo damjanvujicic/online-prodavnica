@@ -7,6 +7,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.annotation.security.RolesAllowed;
 import java.util.List;
 
 @Path("/kupci")
@@ -18,6 +19,7 @@ public class KupacResource {
     KupacService kupacService;
 
     @POST
+    @RolesAllowed({"admin"})
     public Response dodajKupca(Kupac kupac) {
         kupacService.sacuvajKupca(kupac);
         return Response.status(Response.Status.CREATED).entity(kupac).build();
@@ -29,7 +31,7 @@ public class KupacResource {
     }
 
     // @PathParam - kupac po ID-u
-    // http://localhost:8080/kupci/1
+    // http://localhost:8081/kupci/1
     @GET
     @Path("/{id}")
     public Response kupacPoId(@PathParam("id") Long id) {
@@ -41,7 +43,7 @@ public class KupacResource {
     }
 
     // @QueryParam - kupci po gradu
-    // http://localhost:8080/kupci/pretraga?grad=Sarajevo
+    // http://localhost:8081/kupci/pretraga?grad=Sarajevo
     @GET
     @Path("/pretraga")
     public List<Kupac> kupciPoGradu(@QueryParam("grad") String grad) {
@@ -49,7 +51,7 @@ public class KupacResource {
     }
 
     // Sve narudžbe za određenog kupca
-    // http://localhost:8080/kupci/1/narudzbe
+    // http://localhost:8081/kupci/1/narudzbe
     @GET
     @Path("/{id}/narudzbe")
     public List<Narudzba> narudzbeKupca(@PathParam("id") Long id) {

@@ -29,7 +29,7 @@ public class NarudzbaResource {
     }
 
     // @PathParam - narudžba po ID-u
-    // http://localhost:8080/narudzbe/1
+    // http://localhost:8081/narudzbe/1
     @GET
     @Path("/{id}")
     public Response narudzbaPoId(@PathParam("id") Long id) {
@@ -41,7 +41,7 @@ public class NarudzbaResource {
     }
 
     // @QueryParam - narudžbe po statusu
-    // http://localhost:8080/narudzbe/pretraga?status=aktivan
+    // http://localhost:8081/narudzbe/pretraga?status=aktivan
     @GET
     @Path("/pretraga")
     public List<Narudzba> narudzbePoStatusu(@QueryParam("status") String status) {
@@ -49,7 +49,7 @@ public class NarudzbaResource {
     }
 
     // Sve stavke za određenu narudžbu
-    // http://localhost:8080/narudzbe/1/stavke
+    // http://localhost:8081/narudzbe/1/stavke
     @GET
     @Path("/{id}/stavke")
     public List<StavkaNarudzbe> stavkeNarudzbe(@PathParam("id") Long id) {
