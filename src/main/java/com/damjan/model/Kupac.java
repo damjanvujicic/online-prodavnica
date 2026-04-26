@@ -2,6 +2,8 @@ package com.damjan.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,6 +25,9 @@ public class Kupac {
     @JsonIgnore
     @OneToMany(mappedBy = "kupac", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Narudzba> narudzbe;
+
+    @OneToMany(mappedBy = "kupac", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public List<TimeZoneInfo> timeZones = new ArrayList<>();
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

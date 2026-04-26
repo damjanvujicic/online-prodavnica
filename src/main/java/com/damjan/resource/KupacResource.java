@@ -57,4 +57,20 @@ public class KupacResource {
     public List<Narudzba> narudzbeKupca(@PathParam("id") Long id) {
         return kupacService.narudzbeKupca(id);
     }
+
+    //Dodaj time zone
+    @GET
+    @Path("/getTimezoneByIP")
+    public Response getTimezone(@QueryParam("userId") Long userId) {
+
+        try {
+            Kupac kupac = kupacService.dodajTimeZone(userId);
+            return Response.ok(kupac).build();
+
+        } catch (NotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
+        }
+    }
 }
